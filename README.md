@@ -88,7 +88,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
-      - "traefik.http.routers.whoami.entrypoints=web,websecure"
+      - "traefik.http.routers.whoami.entrypoints=web2websecure,websecure"
       - "traefik.http.routers.whoami.rule=Host(`whoami.public.org`)"
       - "traefik.http.routers.whoami.service=whoami"
       - "traefik.http.routers.whoami.tls.certresolver=tlssolver"
