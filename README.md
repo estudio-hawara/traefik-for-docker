@@ -85,8 +85,6 @@ version: '3.8'
 services:
   whoami:
     image: containous/whoami
-    environment:
-      - APP_HOST
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
