@@ -79,17 +79,21 @@ Check the [Official Traefik Documentation for Docker Routing Rules](https://doc.
 This Traefik container defines a `traefik` network. To get a service to work along with it, you'll need to set the labels described above and also add the service to this network.
 
 ```yml
+# docker-compose.yml
 version: '3.8'
 
 services:
   whoami:
     image: containous/whoami
+    environment:
+      - APP_HOST
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
-      - "traefik.http.routers.whoami.entrypoints=web"
-      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=web,websecure"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.public.org`)"
       - "traefik.http.routers.whoami.service=whoami"
+      - "traefik.http.routers.whoami.tls.certresolver=tlssolver"
       - "traefik.http.services.whoami.loadbalancer.server.port=80"
     networks:
       - traefik
@@ -100,4 +104,17 @@ networks:
     external: true
 ```
 
-Note that you can still add your service to additional networks.
+```yml
+# docker-compose.dev.yml
+services:
+  whoami:
+    labels:
+      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+      - "traefik.http.routers.whoami.tls=false"
+```
+
+Note that:
+
+- To make the HTTPs example work, you'll need to use a real domain you own, rather than the example `whoami.public.org` we used above.
+- You can still add your service to additional networks.
