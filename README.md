@@ -10,8 +10,8 @@
 As you can see, this project consists on a tiny amount of files that can help you setting up a Traefik instance running in Docker.
 
 ```bash
-git clone git@github.com:hawara-es/traefik-for-docker.git && \
-  cd traefik-for-docker
+git clone https://github.com/hawara-es/traefik-for-docker.git
+cd traefik-for-docker
 ```
 
 To run this Traefik router you need to have Docker in your system. If you are using an Ubuntu machine in a development environment, you may get advantage of the convenience deployment script:
