@@ -116,3 +116,13 @@ Note that:
 
 - To make the HTTPs example work, you'll need to use a real domain you own, rather than the example `whoami.public.org` we used above.
 - You can still add your service to additional networks.
+
+## Backup your Certificates
+
+The API that Let's Encrypt offers is free but it's protected by some rate limits. This means that if you call it too much.
+
+To prevent possible issues with your certificates, it's highly recommended to make copies of them outside your container.
+
+```bash
+docker compose exec traefik cat /acme.json > acme.json
+```
