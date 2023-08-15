@@ -1,0 +1,15 @@
+#!/bin/bash
+
+apt update
+
+curl -fsSL https://get.docker.com -o get-docker.sh && \
+  sh get-docker.sh && \
+  rm get-docker.sh
+
+adduser docker-user -q --disabled-password --disabled-login
+groupadd docker
+usermod -aG docker docker-user
+
+echo ""
+echo "You can now run docker with the non-root user: docker-user"
+echo "> su docker-user"
