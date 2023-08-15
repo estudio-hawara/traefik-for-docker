@@ -22,55 +22,41 @@ To run this Traefik router you need to have Docker in your system. If you are us
 
 Otherwise, please check the official documentation: [Install Docker Engine](https://docs.docker.com/engine/install/).
 
-### Start the Router
+### Choose the Environment Type
 
-The `prod` and `dev` scripts allows you to quickly run the service in either production or development mode.
+To deploy the Traefik service you need to create a `.env` file. To help you doing it quickly, there are two templates you can choose from, depending on the type of environment you are setting up:
 
 ```bash
-# ... in production
-./prod up -d
+# Production
+cp .env.prod .env
 
-# ... in development
-./dev up -d
+# Development
+cp .env.dev .env
 ```
-
-Keep in mind that you won't use both types of environments at once.
-
-### Set Up a Production Environment
 
 The main difference between production and development environments is that production environments require the services to use Let's Encrypt certificates.
 
-Apart from making your public domain reach the public IP address that's pointing to Traefik, you'll also need to configure an environment variable:
+This means that, apart from making your public domain reach the public IP address that's pointing to Traefik, you'll also need to configure an environment variable with your email:
 
 ```sh
-TRAEFIK_CERTIFICATESRESOLVERS_LETSSOLVER_ACME_EMAIL
+TRAEFIK_CERTIFICATESRESOLVERS_TLSSOLVER_ACME_EMAIL
 ```
 
-The easiest way to achieve this is to copy `.env.example` as `.env` and add your email there.
+The email will be used to negociate the certificates with Let's Encrypt.
 
-## Check the Service Status
+### Start the Router
 
-You can also use the scripts to check the status of the Traefik service.
+You can now run your router by using the standard Docker command:
 
 ```bash
-./prod ps
+# Production
+docker compose up -d
+
+# Development
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 ```
 
-Of course, this and all the other commands also works with the `dev` script.
-
-### Read the Logs
-
-You can read the logs of your Traefik container with:
-
-```bash
-./prod logs
-```
-
-Or follow it live as its changed with:
-
-```bash
-./prod -f logs
-```
+Keep in mind that you won't use both types of environments at once.
 
 ## Deploy Services
 

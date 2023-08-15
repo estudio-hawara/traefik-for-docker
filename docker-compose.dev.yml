@@ -4,14 +4,3 @@ services:
   traefik:
     ports:
       - "8080:8080"
-    environment:
-      # https://doc.traefik.io/traefik/reference/static-configuration/env/
-      - TRAEFIK_API_INSECURE=true
-      - TRAEFIK_API_DASHBOARD=true
-      - TRAEFIK_LOG_LEVEL=DEBUG
-      - TRAEFIK_PROVIDERS_DOCKER=true
-      - TRAEFIK_PROVIDERS_DOCKER_NETWORK=traefik
-      - TRAEFIK_PROVIDERS_DOCKER_WATCH=true
-      - TRAEFIK_PROVIDERS_DOCKER_EXPOSEDBYDEFAULT=false
-      - TRAEFIK_ENTRYPOINTS_web=true
-      - TRAEFIK_ENTRYPOINTS_web_ADDRESS=:80
