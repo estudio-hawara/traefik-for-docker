@@ -5,7 +5,6 @@ services:
     # https://doc.traefik.io/traefik/
     image: traefik:v2.10
     environment:
-      # https://doc.traefik.io/traefik/reference/static-configuration/env/
       - TRAEFIK_API_INSECURE
       - TRAEFIK_API_DASHBOARD
       - TRAEFIK_LOG_LEVEL
@@ -27,6 +26,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
