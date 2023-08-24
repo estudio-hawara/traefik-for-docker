@@ -88,7 +88,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
-      - "traefik.http.routers.whoami.entrypoints=web2websecure,websecure"
+      - "traefik.http.routers.whoami.entrypoints=web,websecure"
       - "traefik.http.routers.whoami.rule=Host(`whoami.public.org`)"
       - "traefik.http.routers.whoami.service=whoami"
       - "traefik.http.routers.whoami.tls.certresolver=tlssolver"
@@ -117,12 +117,8 @@ Note that:
 - To make the HTTPs example work, you'll need to use a real domain you own, rather than the example `whoami.public.org` we used above.
 - You can still add your service to additional networks.
 
-## Backup your Certificates
+## Backup of your Certificates
 
-The API that Let's Encrypt offers is free but it's protected by some rate limits. This means that if you call it too much.
+The API that Let's Encrypt offers is free but it's protected by some rate limits. This means that if you call it too much, you'll get blocked and you will be forced to wait until you can get a new certificate for your domain.
 
-To prevent possible issues with your certificates, it's highly recommended to make copies of them outside your container.
-
-```bash
-docker compose exec traefik cat /acme.json > acme.json
-```
+To prevent this, the `acme.json` file that contains your certificates will be mirrored locally as `/_volumes/acme.json`.
