@@ -10,7 +10,7 @@
 As you can see, this project consists on a tiny amount of files that can help you setting up a Traefik instance running in Docker.
 
 ```bash
-git clone https://github.com/hawara-es/traefik-for-docker.git
+git clone https://github.com/estudio-hawara/traefik-for-docker.git
 cd traefik-for-docker
 ```
 
