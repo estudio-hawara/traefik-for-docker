@@ -28,15 +28,13 @@ To deploy the Traefik service you need to create a `.env` file. To help you doin
 
 ```bash
 # Production
-cp .env.prod .env
+cp env.prod .env
 
 # Development
-cp .env.dev .env
+cp env.dev .env
 ```
 
-The main difference between production and development environments is that production environments require the services to use Let's Encrypt certificates.
-
-This means that, apart from making your public domain reach the public IP address that's pointing to Traefik, you'll also need to configure an environment variable with your email:
+The main difference between production and development environments is that production environments require the services to use Let's Encrypt certificates. This means that, apart from making your public domain reach the public IP address that's pointing to Traefik, you'll also need to configure an environment variable with your email:
 
 ```sh
 TRAEFIK_CERTIFICATESRESOLVERS_TLSSOLVER_ACME_EMAIL
@@ -80,8 +78,6 @@ This Traefik container defines a `traefik` network. To get a service to work alo
 
 ```yml
 # docker-compose.yml
-version: '3.8'
-
 services:
   whoami:
     image: containous/whoami
@@ -119,6 +115,4 @@ Note that:
 
 ## Backup of your Certificates
 
-The API that Let's Encrypt offers is free but it's protected by some rate limits. This means that if you call it too much, you'll get blocked and you will be forced to wait until you can get a new certificate for your domain.
-
-To prevent this, the `acme.json` file that contains your certificates will be mirrored locally as `/_volumes/acme.json`.
+The API that Let's Encrypt offers is free but it's protected by some rate limits. This means that if you call it too much, you'll get blocked and you will be forced to wait until you can get a new certificate for your domain. To prevent this, the `acme.json` file that contains your certificates will be mirrored locally as `/_volumes/acme.json`.

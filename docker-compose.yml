@@ -1,7 +1,7 @@
 services:
   traefik:
     # https://doc.traefik.io/traefik/
-    image: traefik:v2.10
+    image: traefik:${TRAEFIK_VERSION}
     environment:
       - TRAEFIK_API_INSECURE
       - TRAEFIK_API_DASHBOARD
